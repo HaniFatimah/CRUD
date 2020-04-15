@@ -1,0 +1,89 @@
+<?php
+	include_once("koneksi.php");
+
+
+	$query_search = "SELECT MAX(kode_produk) as kod FROM form_barang";
+	$result_search = mysqli_query($conn, $query_search);
+	$ds_query = mysqli_fetch_array($result_search);
+	$take_code = substr($ds_query['kod'], 3,6);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tambah Produk</title>
+</head>
+<body>
+	<center>
+		<h2>Tambah Produk</h2>
+
+		<form method="post" action="prosestambahproduk.php">
+			<table>
+				<tr>
+					<td>Kode Produk</td>
+					<td><input type="text" name="txtKode" size="30px" value="
+						<?php
+						$tambah = +1;
+						if($tambah < 10){
+							echo "MD-0". $tambah;
+						}else {
+							echo "MD-00". $tambah;
+						}
+
+						?>"></td>
+				</tr>
+
+				<tr>
+					<td>Nama Produk</td>
+					<td><input type="text" name="txtNama" size="30px"></td>
+				</tr>
+
+				<tr>
+					<td>Harga Produk</td>
+					<td><input type="text" name="txtHarga" size="30px"></td>
+				</tr>
+
+				<tr>
+           			 <td>Satuan</td>
+              		 <td>
+              	 	 <select name="txtSatuan" style="width: 100%">
+                     <option value="null">Pilih Satuan</option>
+                     <option value="Gelas">Gelas</option>
+                     <option value="Piring">Box</option>
+                     <option value="Makanan">Piring</option>
+                 	 </select>
+             		 </td>
+        		</tr>
+
+				<tr>
+           			 <td>Kategori</td>
+           			 <td>
+           		     <select name="txtKategori" style="width: 100%">
+                     <option value="null">Pilih Kategori</option>
+                     <option value="Minuman Dingin">Minuman Dingin</option>
+                     <option value="Makanan">Makanan Hangat</option>
+                     <option value="Snack">Snack</option>
+               		 </select>
+            		</td>
+        		</tr>
+
+				<tr>
+					<td>URL Gambar</td>
+					<td><input type="url" name="txtGambar" id="gampro" size="30px"></td>
+				</tr>
+
+				<tr>
+					<td>Stok Awal</td>
+					<td><input type="text" name="txtStok" size="30px"></td>
+				</tr>
+
+				<tr>
+					<td> </td>
+					<td><input type="submit" value="Tambah Data"></td>
+				</tr>
+			</table>
+		</form>
+	</center>
+
+</body>
+</html>
